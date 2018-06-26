@@ -19,15 +19,6 @@
 var quat = new THREE.Quaternion();
 var highlightedId = 'ip0';
 var inputMode = 0;
-function matrixToString(m)
-{
-    var r = m.elements;
-    var s = 
-         '[ ' +toFixedWidth(r[0])+', '+toFixedWidth(r[4])+', '+toFixedWidth(r[8])+';\n'
-        +'  ' +toFixedWidth(r[1])+', '+toFixedWidth(r[5])+', '+toFixedWidth(r[9])+';\n'
-        +'  ' +toFixedWidth(r[2])+', '+toFixedWidth(r[6])+', '+toFixedWidth(r[10])+' ]';    
-    return s;
-}
 function setQ(q)
 {
     q.normalize();
@@ -39,7 +30,6 @@ function doOutput()
     var q = quat;
     var m = new THREE.Matrix4();
     m.makeRotationFromQuaternion(q);
-    document.getElementById("resmatrix").value = matrixToString(m);
     document.getElementById("resq").value = '[ '+toReal(q.x)+', '+toReal(q.y)+', '+toReal(q.z)+', '+toReal(q.w)+' ]';
     
     var axis = [0, 0, 0];
@@ -110,25 +100,11 @@ function getVector(root)
 }
 function toRad(x)
 {
-    if (document.getElementById("iformatdeg").checked)
-    {
-        return x / 180 * Math.PI;
-    }
-    else
-    {
-        return x;
-    }
+     return x / 180 * Math.PI;
 }
 function toAngle(x)
 {
-    if (document.getElementById("resformatdeg").checked)
-    {
-        return x * 180 / Math.PI;
-    }
-    else
-    {
-        return x;
-    }
+    return x * 180 / Math.PI;
 }
 function toReal(x){
 	if (!isNaN(parseFloat(x)) && isFinite(parseFloat(x)))
@@ -153,13 +129,7 @@ function toFixedWidth(x){
 	}
 }
 </script>
-<p>Output angle format
-<label><input type="radio" id="resformatrad" name="resformat" value="0" checked onchange="doOutput()"/>Radians</label>
-<label><input type="radio" id="resformatdeg" name="resformat" value="1" onchange="doOutput()"/>Degrees</label>
-<p>Rotation matrix
-<br /><textarea id="resmatrix" rows="3" cols="70" readonly></textarea>
-<p>Quaternion [x, y, z, w]
-<br /><textarea id="resq" rows="1" cols="85" readonly></textarea>
+
 <p>Axis-Angle {[x, y, z], angle<span name="spanangleres"> (radians)</span>}
 <br /><textarea id="resa" rows="1" cols="85" readonly></textarea>
 <p>Axis with angle magnitude<span name="spanangleres"> (radians)</span> [x, y, z]
