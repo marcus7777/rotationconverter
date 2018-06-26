@@ -55,31 +55,6 @@ function doOutput()
     eu.setFromRotationMatrix(m, document.getElementById("reseuler").value);
     document.getElementById("rese").value = '[ x: '+toReal(toAngle(eu.toArray()[0]))+', y: '+toReal(toAngle(eu.toArray()[1]))+', z: '+toReal(toAngle(eu.toArray()[2]))+' ]';
 
-    var spansi = document.getElementsByName('spananglei');
-    for (var i = 0; i < spansi.length; i++)
-    {
-        if (document.getElementById('iformatrad').checked)
-        {
-            spansi[i].textContent = ' (radians)';
-        }
-        else
-        {
-            spansi[i].textContent = ' (degrees)';
-        }
-    }
-     
-    var spansres = document.getElementsByName('spanangleres');
-    for (var i = 0; i < spansres.length; i++)
-    {
-        if (document.getElementById('resformatrad').checked)
-        {
-            spansres[i].textContent = ' (radians)';
-        }
-        else
-        {
-            spansres[i].textContent = ' (degrees)';
-        }
-    }
 }
 function update(mode)
 {
